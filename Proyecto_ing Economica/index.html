@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ingeniería Económica</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+overflow:hidden;
+}
+
+.fondo{
+width:100%;
+height:100vh;
+
+background:
+linear-gradient(
+rgba(0,0,0,.65),
+rgba(0,0,0,.65)
+),
+url("fondo.jpg");
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+
+animation:zoom 15s infinite alternate;
+}
+
+@keyframes zoom{
+
+from{
+background-size:100%;
+}
+
+to{
+background-size:115%;
+}
+
+}
+
+.tarjeta{
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(12px);
+
+padding:50px;
+
+border-radius:30px;
+
+width:850px;
+
+max-width:90%;
+
+box-shadow:0 0 30px rgba(0,0,0,.6);
+
+animation:entrada 1.5s;
+}
+
+@keyframes entrada{
+
+from{
+opacity:0;
+transform:translateY(40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.logo{
+
+width:160px;
+
+border-radius:50%;
+
+background:white;
+
+padding:10px;
+
+margin-bottom:20px;
+
+animation:flotar 3s infinite ease-in-out;
+}
+
+@keyframes flotar{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+.uni{
+
+color:white;
+
+font-size:28px;
+
+font-weight:bold;
+
+margin-bottom:10px;
+
+letter-spacing:2px;
+}
+
+.carrera{
+
+color:#d1fae5;
+
+font-size:18px;
+
+margin-bottom:40px;
+}
+
+.titulo{
+
+font-size:90px;
+
+font-weight:900;
+
+line-height:1;
+
+color:white;
+
+margin-bottom:35px;
+
+text-shadow:0 0 20px rgba(255,255,255,.3);
+}
+
+.boton{
+
+display:inline-block;
+
+padding:18px 45px;
+
+background:#10b981;
+
+color:white;
+
+text-decoration:none;
+
+font-size:20px;
+
+font-weight:bold;
+
+border-radius:50px;
+
+transition:.3s;
+}
+
+.boton:hover{
+
+background:#34d399;
+
+transform:scale(1.05);
+}
+
+@media(max-width:768px){
+
+.logo{
+width:120px;
+}
+
+.titulo{
+font-size:55px;
+}
+
+.uni{
+font-size:18px;
+}
+
+.carrera{
+font-size:14px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="fondo">
+
+<div class="tarjeta">
+
+<img src="logo.jpg" class="logo">
+
+<div class="uni">
+UNIVERSIDAD AGRARIA DEL ECUADOR
+</div>
+
+<div class="carrera">
+CARRERA: CIENCIAS DE LA COMPUTACIÓN - MODALIDAD EN LÍNEA
+</div>
+
+<div class="titulo">
+
+INGENIERÍA<br>
+ECONÓMICA
+
+</div>
+
+<a href="contenido.html" class="boton">
+
+INICIAR PROYECTO
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

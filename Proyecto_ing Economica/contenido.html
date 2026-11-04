@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE - Contenido de Ingeniería Económica</title>
+    <!-- Fuente elegante para el texto UAE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* FONDO GRIS ELEGANTE CON TRANSPARENCIA */
+        body {
+            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 50%, #64748b 100%);
+            background-size: 300% 300%;
+            animation: gradientBG 12s ease infinite;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* FRANJA SUPERIOR FIJA */
+        .header-top {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-brand img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+            transition: transform 0.4s ease;
+        }
+
+        .header-brand img:hover {
+            transform: rotate(360deg);
+        }
+
+        .header-brand span {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #facc15;
+            text-shadow: 0 2px 10px rgba(250, 204, 21, 0.6);
+        }
+
+        /* BOTÓN MENÚ HAMBURGUESA */
+        .hamburger-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 32px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .hamburger-btn span {
+            width: 100%;
+            height: 4px;
+            background-color: #facc15;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* MENÚ DESPLEGABLE AZUL MARÍTIMO */
+        .nav-menu-container {
+            display: none;
+            background: rgba(30, 58, 138, 0.98);
+            backdrop-filter: blur(12px);
+            width: 100%;
+            position: fixed;
+            top: 85px;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-bottom: 4px solid #facc15;
+        }
+
+        .nav-menu-container.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-links li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background: #172554;
+            color: #facc15;
+            padding-left: 45px;
+        }
+
+        .nav-links li a.btn-salir {
+            color: #fca5a5;
+            background: rgba(220, 38, 38, 0.15);
+        }
+
+        .nav-links li a.btn-salir:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        /* TÍTULO DE LA SECCIÓN */
+        .titulo-seccion {
+            text-align: center;
+            padding: 35px 20px 10px;
+        }
+
+        .titulo-seccion h1 {
+            color: #0f172a;
+            font-size: 40px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.6);
+        }
+
+        /* CONTENEDOR GENERAL ANCHO */
+        .container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 10px 20px 40px;
+        }
+
+        /* --- CARRUSEL GRANDE AUTOMÁTICO (ARRIBA) --- */
+        .carrusel-grande-container {
+            width: 100%;
+            height: 480px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #ffffff;
+            padding: 15px;
+        }
+
+        .carrusel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 23, 42, 0.6);
+            color: #facc15;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .carrusel-btn:hover {
+            background: #1e3a8a;
+            color: white;
+            transform: translateY(-50%) scale(1.15);
+        }
+
+        .btn-prev { left: 20px; }
+        .btn-next { right: 20px; }
+
+        .carrusel-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #1e3a8a;
+            width: 28px;
+            border-radius: 10px;
+        }
+
+        /* --- CUADROS HORIZONTALES EN FILA --- */
+        .cuadros-horizontales-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .modulo-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-left: 6px solid #1e3a8a;
+            border-top: 1px solid rgba(255,255,255,0.8);
+            outline: none;
+            border-right: none;
+            border-bottom: none;
+            width: 100%;
+        }
+
+        .modulo-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 18px 35px rgba(30, 58, 138, 0.25);
+            border-left-color: #facc15;
+            background: #ffffff;
+        }
+
+        /* Animación activa al presionar la tarjeta */
+        .modulo-card.active {
+            background: #1e3a8a;
+            border-left-color: #facc15;
+            transform: scale(0.98);
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .modulo-card.active .modulo-card-title {
+            color: #facc15;
+        }
+
+        .modulo-card-title {
+            font-size: 16px;
+            color: #1e3a8a;
+            font-weight: bold;
+            line-height: 1.3;
+            transition: color 0.3s;
+        }
+
+        /* --- CONTENIDO DESPLEGABLE TIPO ACORDEÓN --- */
+        .acordeon-content-box {
+            display: none;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-top: 5px solid #1e3a8a;
+            margin-bottom: 20px;
+            animation: expandContent 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes expandContent {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .acordeon-content-box.active {
+            display: block;
+        }
+
+        .grid-desplegable {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .imagen-desplegable {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .imagen-desplegable:hover {
+            transform: scale(1.03);
+        }
+
+        .lista-puntos {
+            margin: 12px 0 0 20px;
+            color: #475569;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 60px;
+            border-top: 4px solid #facc15;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+            object-fit: cover;
+        }
+
+        .footer-text h2 { margin: 0; font-size: 20px; color: #facc15; }
+        .footer-text p { margin-top: 3px; color: #94a3b8; font-size: 13px; }
+
+        .footer-info {
+            color: #cbd5e1;
+            font-size: 13px;
+            border-top: 1px solid #334155;
+            padding-top: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 1024px) {
+            .cuadros-horizontales-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cuadros-horizontales-grid {
+                grid-template-columns: 1fr;
+            }
+            .grid-desplegable {
+                grid-template-columns: 1fr;
+            }
+            .carrusel-grande-container {
+                height: 300px;
+            }
+            .header-brand span { font-size: 24px; }
+            .titulo-seccion h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FRANJA SUPERIOR -->
+    <div class="header-top">
+        <div class="header-left">
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="header-brand">
+                <img src="logo.jpg" alt="Logo UAE">
+                <span>UAE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENÚ DESPLEGABLE -->
+    <nav class="nav-menu-container" id="nav-menu-container">
+        <ul class="nav-links">
+            <li><a href="Contenido.html" class="active">Contenido</a></li>
+            <li><a href="Calculadora.html">Calculadora Interactiva</a></li>
+            <li><a href="Formula.html">Fórmulas</a></li>
+            <li><a href="Ejercicios.html">Ejercicios Resueltos</a></li>
+            <li><a href="Integrantes.html">Integrantes</a></li>
+            <li><a href="index.html" class="btn-salir">Salir ✕</a></li>
+        </ul>
+    </nav>
+
+    <!-- TÍTULO DE LA PÁGINA -->
+    <div class="titulo-seccion">
+        <h1>INGENIERÍA ECONÓMICA</h1>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="container">
+
+        <!-- CARRUSEL GRANDE AUTOMÁTICO (ARRIBA) -->
+        <section class="carrusel-grande-container" id="carrusel-slider">
+            <button class="carrusel-btn btn-prev" onclick="prevSlide()">❮</button>
+            <button class="carrusel-btn btn-next" onclick="nextSlide()">❯</button>
+
+            <div class="slide active">
+                <img src="banner1.jpg" alt="Banner 1">
+            </div>
+            <div class="slide">
+                <img src="banner2.jpg" alt="Banner 2">
+            </div>
+            <div class="slide">
+                <img src="banner3.jpg" alt="Banner 3">
+            </div>
+            <div class="slide">
+                <img src="banner4.jpg" alt="Banner 4">
+            </div>
+            <div class="slide">
+                <img src="banner5.jpg" alt="Banner 5">
+            </div>
+
+            <div class="carrusel-dots" id="carrusel-dots">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
+                <span class="dot" onclick="goToSlide(3)"></span>
+                <span class="dot" onclick="goToSlide(4)"></span>
+            </div>
+        </section>
+
+        <!-- CUADROS HORIZONTALES EN FILA -->
+        <section class="cuadros-horizontales-grid">
+            
+            <button class="modulo-card" onclick="toggleAcordeon('contenido-1', this)">
+                <div class="modulo-card-title">¿Qué es la Ingeniería Económica?</div>
+            </button>
+
+            <button class="modulo-card" onclick="toggleAcordeon('contenido-2', this)">
+                <div class="modulo-card-title">Importancia de la Ingeniería Económica</div>
+            </button>
+
+            <button class="modulo-card" onclick="toggleAcordeon('contenido-3', this)">
+                <div class="modulo-card-title">Aplicación en Ciencias de la Computación</div>
+            </button>
+
+            <button class="modulo-card" onclick="toggleAcordeon('contenido-4', this)">
+                <div class="modulo-card-title">Concepto de Interés Simple</div>
+            </button>
+
+        </section>
+
+        <!-- BLOQUES DESPLEGABLES (ACORDEÓN) -->
+        
+        <!-- ACORDEÓN 1 -->
+        <div id="contenido-1" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 24px;">¿Qué es la Ingeniería Económica?</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 12px;">
+                        La Ingeniería Económica permite comparar alternativas de inversión y proyectos de ingeniería considerando el valor del dinero en el tiempo, los costos, los beneficios y el rendimiento esperado.
+                    </p>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px;">
+                        Su aplicación facilita la elección de opciones que aprovechen de manera óptima los recursos disponibles y contribuyan a tomar decisiones financieras fundamentadas.
+                    </p>
+                </div>
+                <div>
+                    <img src="ingenieria.jpg" class="imagen-desplegable" alt="Ingeniería Económica">
+                </div>
+            </div>
+        </div>
+
+        <!-- ACORDEÓN 2 -->
+        <div id="contenido-2" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 24px;">Importancia de la Ingeniería Económica</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 12px;">
+                        La necesidad de la ingeniería económica se encuentra motivada principalmente por el trabajo que llevan a cabo los ingenieros al analizar, sintetizar y obtener conclusiones en proyectos de cualquier envergadura.
+                    </p>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px;">
+                        En otras palabras, representa un pilar medular en la toma de decisiones que implican flujos de efectivo, tiempo y tasas de interés.
+                    </p>
+                </div>
+                <div>
+                    <img src="importancia.jpg" class="imagen-desplegable" alt="Importancia">
+                </div>
+            </div>
+        </div>
+
+        <!-- ACORDEÓN 3 -->
+        <div id="contenido-3" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 24px;">Aplicación en Ciencias de la Computación</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 12px;">
+                        Ayuda a estudiantes de computación y desarrolladores a decidir si una solución tecnológica conviene considerando sus costos, beneficios y duración.
+                    </p>
+                    <ul class="lista-puntos">
+                        <li><strong>Costo inicial:</strong> desarrollo, equipos y licencias.</li>
+                        <li><strong>Costos de operación:</strong> servicios en la nube y mantenimiento.</li>
+                        <li><strong>Beneficios esperados:</strong> ahorro de tiempo y automatización.</li>
+                        <li><strong>Riesgos:</strong> cambios tecnológicos y obsolescencia.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="tecnologia.jpg" class="imagen-desplegable" alt="Tecnología">
+                </div>
+            </div>
+        </div>
+
+        <!-- ACORDEÓN 4 -->
+        <div id="contenido-4" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 24px;">Concepto de Interés Simple</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 12px;">
+                        En el interés simple, el capital que genera dicho interés permanece constante a lo largo de todo el tiempo que dura la operación.
+                    </p>
+                    <ul class="lista-puntos">
+                        <li><strong>Capital (C):</strong> Dinero prestado o invertido.</li>
+                        <li><strong>Tasa de interés (i):</strong> Porcentaje cobrado por el uso del dinero.</li>
+                        <li><strong>Plazo (n):</strong> Tiempo del préstamo.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="interes.jpg" class="imagen-desplegable" alt="Interés Simple">
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-top">
+            <img src="logo.jpg" class="footer-logo" alt="Logo UAE">
+            <div class="footer-text">
+                <h2>UNIVERSIDAD AGRARIA DEL ECUADOR</h2>
+                <p>Carrera: Ciencias de la Computación - Modalidad en Línea</p>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p>Asignatura: Ingeniería Económica</p>
+            <p>Período Académico 2026 - 2027</p>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // LÓGICA DEL MENÚ HAMBURGUESA
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenuContainer = document.getElementById('nav-menu-container');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenuContainer.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenuContainer.classList.remove('active');
+            });
+        });
+
+        // LÓGICA DEL ACORDEÓN HORIZONTAL
+        function toggleAcordeon(idContenido, cardElement) {
+            const contenidoBox = document.getElementById(idContenido);
+            const estaActivo = contenidoBox.classList.contains('active');
+
+            document.querySelectorAll('.acordeon-content-box').forEach(box => {
+                box.classList.remove('active');
+            });
+            document.querySelectorAll('.modulo-card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            if (!estaActivo) {
+                contenidoBox.classList.add('active');
+                cardElement.classList.add('active');
+                contenidoBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // LÓGICA DEL CARRUSEL AUTOMÁTICO
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+        let slideTimer;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            currentSlide = (index + totalSlides) % totalSlides;
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+            resetTimer();
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+            resetTimer();
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+            resetTimer();
+        }
+
+        function startTimer() {
+            slideTimer = setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 3000);
+        }
+
+        function resetTimer() {
+            clearInterval(slideTimer);
+            startTimer();
+        }
+
+        startTimer();
+    </script>
+</body>
+</html>

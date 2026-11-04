@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE - Ejercicios Resueltos de Ingeniería Económica</title>
+    <!-- Fuente elegante para el texto UAE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* FONDO GRIS ELEGANTE CON ANIMACIÓN */
+        body {
+            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 50%, #64748b 100%);
+            background-size: 300% 300%;
+            animation: gradientBG 12s ease infinite;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* FRANJA SUPERIOR */
+        .header-top {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-brand img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+            transition: transform 0.4s ease;
+        }
+
+        .header-brand img:hover {
+            transform: rotate(360deg);
+        }
+
+        .header-brand span {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #facc15;
+            text-shadow: 0 2px 10px rgba(250, 204, 21, 0.6);
+        }
+
+        /* BOTÓN MENÚ HAMBURGUESA */
+        .hamburger-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 32px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .hamburger-btn span {
+            width: 100%;
+            height: 4px;
+            background-color: #facc15;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* MENÚ DESPLEGABLE AZUL MARÍTIMO */
+        .nav-menu-container {
+            display: none;
+            background: rgba(30, 58, 138, 0.98);
+            backdrop-filter: blur(12px);
+            width: 100%;
+            position: fixed;
+            top: 85px;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-bottom: 4px solid #facc15;
+        }
+
+        .nav-menu-container.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-links li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background: #172554;
+            color: #facc15;
+            padding-left: 45px;
+        }
+
+        .nav-links li a.btn-salir {
+            color: #fca5a5;
+            background: rgba(220, 38, 38, 0.15);
+        }
+
+        .nav-links li a.btn-salir:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        /* TÍTULO DE LA SECCIÓN */
+        .titulo-seccion {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        .titulo-seccion h1 {
+            color: #0f172a;
+            font-size: 42px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.6);
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .contenido {
+            max-width: 1250px;
+            margin: auto;
+            padding: 10px 20px 40px;
+        }
+
+        /* GRILLA HORIZONTAL DE TARJETAS MÁS GRANDES (2 COLUMNAS) */
+        .cuadros-horizontales-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .modulo-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            padding: 45px 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-left: 8px solid #1e3a8a;
+            border-top: 1px solid rgba(255,255,255,0.9);
+            outline: none;
+            border-right: none;
+            border-bottom: none;
+            width: 100%;
+            min-height: 140px;
+            justify-content: center;
+        }
+
+        .modulo-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 22px 45px rgba(30, 58, 138, 0.28);
+            border-left-color: #facc15;
+            background: #ffffff;
+        }
+
+        .modulo-card.active {
+            background: #1e3a8a;
+            border-left-color: #facc15;
+            transform: scale(0.98);
+            box-shadow: inset 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .modulo-card.active .modulo-card-title {
+            color: #facc15;
+        }
+
+        .modulo-card-title {
+            font-size: 22px;
+            color: #1e3a8a;
+            font-weight: bold;
+            line-height: 1.4;
+            transition: color 0.3s;
+        }
+
+        /* SECCIÓN DE ACCESO AL EXCEL (SOLO BOTÓN ELEGANTE) */
+        .excel-viewer-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin-top: 30px;
+            margin-bottom: 40px;
+            border-top: 6px solid #1e3a8a;
+            text-align: center;
+        }
+
+        .excel-viewer-section h2 {
+            color: #1e3a8a;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .excel-viewer-section p {
+            color: #475569;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .btn-excel-view {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+            color: #facc15;
+            padding: 16px 35px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            border: 2px solid #facc15;
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-excel-view:hover {
+            background: #172554;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.6);
+            color: #ffffff;
+        }
+
+        /* CAJAS DESPLEGABLES DE CONTENIDO (ACORDEÓN) */
+        .acordeon-content-box {
+            display: none;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.22);
+            border-top: 6px solid #1e3a8a;
+            margin-bottom: 30px;
+            animation: expandContent 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes expandContent {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .acordeon-content-box.active {
+            display: block;
+        }
+
+        .grid-desplegable {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            border: 2px solid #facc15;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #facc15;
+            margin: 15px 0;
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.3);
+        }
+
+        .bloque-datos {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 15px 18px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #475569;
+        }
+
+        .bloque-datos strong {
+            color: #1e3a8a;
+        }
+
+        /* IMAGEN CON EFECTO ZOOM AL PRESIONAR */
+        .excel-screenshot {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 2px solid #cbd5e1;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .excel-screenshot:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(30, 58, 138, 0.3);
+        }
+
+        /* MODAL / LIGTHBOX PARA AGRANDAR LA IMAGEN CON ANIMACIÓN */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            border: 3px solid #facc15;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #facc15;
+            transition: background 0.3s;
+        }
+
+        .modal-close:hover {
+            background: #dc2626;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 60px;
+            border-top: 4px solid #facc15;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+            object-fit: cover;
+        }
+
+        .footer-text h2 { margin: 0; font-size: 20px; color: #facc15; }
+        .footer-text p { margin-top: 3px; color: #94a3b8; font-size: 13px; }
+
+        .footer-info {
+            color: #cbd5e1;
+            font-size: 13px;
+            border-top: 1px solid #334155;
+            padding-top: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .cuadros-horizontales-grid {
+                grid-template-columns: 1fr;
+            }
+            .grid-desplegable {
+                grid-template-columns: 1fr;
+            }
+            .header-brand span { font-size: 24px; }
+            .titulo-seccion h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FRANJA SUPERIOR -->
+    <div class="header-top">
+        <div class="header-left">
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="header-brand">
+                <img src="logo.jpg" alt="Logo UAE">
+                <span>UAE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENÚ DESPLEGABLE -->
+    <nav class="nav-menu-container" id="nav-menu-container">
+        <ul class="nav-links">
+            <li><a href="Contenido.html">Contenido</a></li>
+            <li><a href="Calculadora.html">Calculadora Interactiva</a></li>
+            <li><a href="Formula.html">Fórmulas</a></li>
+            <li><a href="Ejercicios.html" class="active">Ejercicios Resueltos</a></li>
+            <li><a href="Integrantes.html">Integrantes</a></li>
+            <li><a href="index.html" class="btn-salir">Salir ✕</a></li>
+        </ul>
+    </nav>
+
+    <!-- TÍTULO DE LA PÁGINA -->
+    <div class="titulo-seccion">
+        <h1>EJERCICIOS RESUELTOS</h1>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="contenido">
+
+        <!-- GRILLA HORIZONTAL DE TARJETAS MÁS GRANDES -->
+        <div class="cuadros-horizontales-grid">
+            <button class="modulo-card" onclick="toggleAcordeon('ej-1', this)">
+                <div class="modulo-card-title">Ejercicio 1: Tasa de Interés Anual</div>
+            </button>
+            <button class="modulo-card" onclick="toggleAcordeon('ej-2', this)">
+                <div class="modulo-card-title">Ejercicio 2: Tiempo de Inversión</div>
+            </button>
+            <button class="modulo-card" onclick="toggleAcordeon('ej-3', this)">
+                <div class="modulo-card-title">Ejercicio 3: Valor Presente</div>
+            </button>
+            <button class="modulo-card" onclick="toggleAcordeon('ej-4', this)">
+                <div class="modulo-card-title">Ejercicio 4: Inversión Pagos Futuros</div>
+            </button>
+            <button class="modulo-card" onclick="toggleAcordeon('ej-5', this)">
+                <div class="modulo-card-title">Ejercicio 5: Depósitos y Retiro (Fecha Focal)</div>
+            </button>
+            <button class="modulo-card" onclick="toggleAcordeon('ej-6', this)">
+                <div class="modulo-card-title">Ejercicio 6: Sustitución de Deudas</div>
+            </button>
+            <button class="modulo-card" onclick="toggleAcordeon('ej-7', this)">
+                <div class="modulo-card-title">Ejercicio 7: Descuento Comercial</div>
+            </button>
+            <button class="modulo-card" onclick="toggleAcordeon('ej-8', this)">
+                <div class="modulo-card-title">Ejercicio 8: Tasa Real Equivalente</div>
+            </button>
+        </div>
+
+        <!-- BLOQUES DESPLEGABLES (ACORDEÓN CON CONTENIDO Y CAPTURAS DE EXCEL) -->
+
+        <!-- EJERCICIO 1 -->
+        <div id="ej-1" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 12px; font-size: 24px;">Ejercicio 1: Tasa de Interés Anual</h2>
+                    <p style="color: #475569; font-size: 15px; margin-bottom: 10px; line-height: 1.6;">
+                        ¿Cuál es la tasa de interés a la que estuvo invertido un capital de <strong>$110.000</strong> durante 2 años y 5 meses si produjo <strong>$39.875</strong> de interés?
+                    </p>
+                    <div class="bloque-datos">
+                        <strong>Datos:</strong> C = $110.000 | I = $39.875 | n = 2.4167 años (29/12)
+                    </div>
+                    <div class="formula-box">
+                        i = I / (C &times; n) = 15,00% anual
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 13px; color: #64748b; margin-bottom: 5px; font-weight: bold; text-align: center;">Haz clic para ampliar:</p>
+                    <img src="ejercicio1.png" class="excel-screenshot" alt="Excel Ejercicio 1" onclick="abrirModal(this)">
+                </div>
+            </div>
+        </div>
+
+        <!-- EJERCICIO 2 -->
+        <div id="ej-2" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 12px; font-size: 24px;">Ejercicio 2: Tiempo de Inversión</h2>
+                    <p style="color: #475569; font-size: 15px; margin-bottom: 10px; line-height: 1.6;">
+                        ¿Qué tiempo estuvo invertido un capital de <strong>$85.000</strong> que produjo <strong>$35.700</strong> de interés a una tasa simple anual del <strong>21%</strong>?
+                    </p>
+                    <div class="bloque-datos">
+                        <strong>Datos:</strong> C = $85.000 | I = $35.700 | i = 21% anual
+                    </div>
+                    <div class="formula-box">
+                        n = I / (C &times; i) = 2 años
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 13px; color: #64748b; margin-bottom: 5px; font-weight: bold; text-align: center;">Haz clic para ampliar:</p>
+                    <img src="ejercicio2.png" class="excel-screenshot" alt="Excel Ejercicio 2" onclick="abrirModal(this)">
+                </div>
+            </div>
+        </div>
+
+        <!-- EJERCICIO 3 -->
+        <div id="ej-3" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 12px; font-size: 24px;">Ejercicio 3: Valor Presente</h2>
+                    <p style="color: #475569; font-size: 15px; margin-bottom: 10px; line-height: 1.6;">
+                        Encontrar el valor presente, al <strong>6%</strong> de interés simple anual, de <strong>$1.500</strong> con vencimiento en <strong>9 meses</strong>.
+                    </p>
+                    <div class="bloque-datos">
+                        <strong>Datos:</strong> M = $1.500 | i = 6% | n = 0.75 años (9/12)
+                    </div>
+                    <div class="formula-box">
+                        VP = M / (1 + i &times; n) = $1.435,41
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 13px; color: #64748b; margin-bottom: 5px; font-weight: bold; text-align: center;">Haz clic para ampliar:</p>
+                    <img src="ejercicio3.png" class="excel-screenshot" alt="Excel Ejercicio 3" onclick="abrirModal(this)">
+                </div>
+            </div>
+        </div>
+
+        <!-- EJERCICIO 4 -->
+        <div id="ej-4" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 12px; font-size: 24px;">Ejercicio 4: Inversión Pagos Futuros</h2>
+                    <p style="color: #475569; font-size: 15px; margin-bottom: 10px; line-height: 1.6;">
+                        Invertir el 15 de febrero al <strong>5,1%</strong> simple anual para disponer de $7.000 el 9 de mayo, $15.500 el 20 de junio y $10.000 el 23 de diciembre (Año comercial de 360 días).
+                    </p>
+                    <div class="bloque-datos">
+                        <strong>Datos:</strong> Tasa = 5.1% | Año comercial = 360 días
+                    </div>
+                    <div class="formula-box">
+                        VP Total = Suma de Flujos Descontados = $31.726,95
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 13px; color: #64748b; margin-bottom: 5px; font-weight: bold; text-align: center;">Haz clic para ampliar:</p>
+                    <img src="ejercicio4.png" class="excel-screenshot" alt="Excel Ejercicio 4" onclick="abrirModal(this)">
+                </div>
+            </div>
+        </div>
+
+        <!-- EJERCICIO 5 -->
+        <div id="ej-5" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 12px; font-size: 24px;">Ejercicio 5: Depósitos y Retiro (Fecha Focal)</h2>
+                    <p style="color: #475569; font-size: 15px; margin-bottom: 10px; line-height: 1.6;">
+                        Adriana deposita $15.000 el 15 de diciembre y $10.000 el 11 de marzo; retira $9.500 el 28 de enero. Valorar todo al 9 de mayo con <strong>i = 12,48%</strong> simple anual.
+                    </p>
+                    <div class="bloque-datos">
+                        <strong>Datos:</strong> Tasa = 12.48% | Fecha Focal = 9 de mayo
+                    </div>
+                    <div class="formula-box">
+                        Saldo Focal = Depósitos - Retiros = $16.125,91
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 13px; color: #64748b; margin-bottom: 5px; font-weight: bold; text-align: center;">Haz clic para ampliar:</p>
+                    <img src="ejercicio5.png" class="excel-screenshot" alt="Excel Ejercicio 5" onclick="abrirModal(this)">
+                </div>
+            </div>
+        </div>
+
+        <!-- EJERCICIO 6 -->
+        <div id="ej-6" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 12px; font-size: 24px;">Ejercicio 6: Sustitución de Deudas</h2>
+                    <p style="color: #475569; font-size: 15px; margin-bottom: 10px; line-height: 1.6;">
+                        Deuda de $1.000 con vencimiento en 6 meses (al 4%); otra de $2.500 vence en 9 meses sin intereses. Se pagan $2.000 hoy y X al año. Tasa: 5%; Fecha focal: 12 meses.
+                    </p>
+                    <div class="bloque-datos">
+                        <strong>Datos:</strong> Deudas originales vs Pagos propuestos | Tasa equivalencia = 5% | Fecha Focal = 12 meses
+                    </div>
+                    <div class="formula-box">
+                        Valor X hallado por Ecuación de Valor = $1.518,00
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 13px; color: #64748b; margin-bottom: 5px; font-weight: bold; text-align: center;">Haz clic para ampliar:</p>
+                    <img src="ejercicio6.png" class="excel-screenshot" alt="Excel Ejercicio 6" onclick="abrirModal(this)">
+                </div>
+            </div>
+        </div>
+
+        <!-- EJERCICIO 7 -->
+        <div id="ej-7" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 12px; font-size: 24px;">Ejercicio 7: Descuento Comercial</h2>
+                    <p style="color: #475569; font-size: 15px; margin-bottom: 10px; line-height: 1.6;">
+                        Préstamo nominal de $30.000 descontado al <strong>35%</strong> anual por anticipado durante 8 meses.
+                    </p>
+                    <div class="bloque-datos">
+                        <strong>Datos:</strong> F = $30.000 | d = 35% | n = 8/12 años
+                    </div>
+                    <div class="formula-box">
+                        D = F &times; d &times; n = $7.000 | P = $23.000
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 13px; color: #64748b; margin-bottom: 5px; font-weight: bold; text-align: center;">Haz clic para ampliar:</p>
+                    <img src="ejercicio7.png" class="excel-screenshot" alt="Excel Ejercicio 7" onclick="abrirModal(this)">
+                </div>
+            </div>
+        </div>
+
+        <!-- EJERCICIO 8 -->
+        <div id="ej-8" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 12px; font-size: 24px;">Ejercicio 8: Tasa Real Equivalente</h2>
+                    <p style="color: #475569; font-size: 15px; margin-bottom: 10px; line-height: 1.6;">
+                        Para el préstamo nominal de $30.000 con descuento anticipado de $7.000 y capital líquido de $23.000, determinar la tasa simple anual equivalente durante 8 meses.
+                    </p>
+                    <div class="bloque-datos">
+                        <strong>Datos:</strong> F = $30.000 | P = $23.000 | D = $7.000 | n = 8/12 años
+                    </div>
+                    <div class="formula-box">
+                        i = (F - P) / (P &times; n) = 45,65% anual
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 13px; color: #64748b; margin-bottom: 5px; font-weight: bold; text-align: center;">Haz clic para ampliar:</p>
+                    <img src="ejercicio8.png" class="excel-screenshot" alt="Excel Ejercicio 8" onclick="abrirModal(this)">
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTÓN DE ACCESO AL EXCEL AL FINAL (SIN EL VISOR INCURSTADO) -->
+        <div class="excel-viewer-section">
+            <h2>Hoja de Cálculo Completa del Taller</h2>
+            <p>Accede directamente al documento en línea para revisar celdas, fórmulas y operaciones detalladas.</p>
+            <a href="https://docs.google.com/spreadsheets/d/1VztohiHJqFsUg3jv6KXjUYvHqB_9xSrQ/edit?usp=sharing" target="_blank" class="btn-excel-view">Ver Excel Completo con Fórmulas ↗</a>
+        </div>
+
+    </div>
+
+    <!-- VENTANA MODAL (ZOOM DE IMAGEN CON ANIMACIÓN) -->
+    <div class="modal-overlay" id="imageModal" onclick="cerrarModal()">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImage" alt="Captura ampliada">
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-top">
+            <img src="logo.jpg" class="footer-logo" alt="Logo UAE">
+            <div class="footer-text">
+                <h2>UNIVERSIDAD AGRARIA DEL ECUADOR</h2>
+                <p>Carrera: Ciencias de la Computación - Modalidad en Línea</p>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p>Asignatura: Ingeniería Económica</p>
+            <p>Período Académico 2026 - 2027</p>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // LÓGICA DEL MENÚ HAMBURGUESA
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenuContainer = document.getElementById('nav-menu-container');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenuContainer.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenuContainer.classList.remove('active');
+            });
+        });
+
+        // LÓGICA DE ACORDEÓN HORIZONTAL
+        function toggleAcordeon(idContenido, cardElement) {
+            const contenidoBox = document.getElementById(idContenido);
+            const estaActivo = contenidoBox.classList.contains('active');
+
+            document.querySelectorAll('.acordeon-content-box').forEach(box => {
+                box.classList.remove('active');
+            });
+            document.querySelectorAll('.modulo-card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            if (!estaActivo) {
+                contenidoBox.classList.add('active');
+                cardElement.classList.add('active');
+                contenidoBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // LÓGICA PARA ABRIR Y CERRAR EL ZOOM DE LAS IMÁGENES CON ANIMACIÓN
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function abrirModal(imgElement) {
+            modal.classList.add('active');
+            modalImg.src = imgElement.src;
+        }
+
+        function cerrarModal() {
+            modal.classList.remove('active');
+        }
+    </script>
+</body>
+</html>

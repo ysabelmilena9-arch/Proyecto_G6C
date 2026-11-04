@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE - Integrantes de Ingeniería Económica</title>
+    <!-- Fuente elegante para el texto UAE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* FONDO GRIS ELEGANTE CON TRANSPARENCIA Y ANIMACIÓN */
+        body {
+            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 50%, #64748b 100%);
+            background-size: 300% 300%;
+            animation: gradientBG 12s ease infinite;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* FRANJA SUPERIOR */
+        .header-top {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-brand img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+            transition: transform 0.4s ease;
+        }
+
+        .header-brand img:hover {
+            transform: rotate(360deg);
+        }
+
+        .header-brand span {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #facc15;
+            text-shadow: 0 2px 10px rgba(250, 204, 21, 0.6);
+        }
+
+        /* BOTÓN MENÚ HAMBURGUESA */
+        .hamburger-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 32px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .hamburger-btn span {
+            width: 100%;
+            height: 4px;
+            background-color: #facc15;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* MENÚ DESPLEGABLE */
+        .nav-menu-container {
+            display: none;
+            background: rgba(30, 58, 138, 0.98);
+            backdrop-filter: blur(12px);
+            width: 100%;
+            position: fixed;
+            top: 85px;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-bottom: 4px solid #facc15;
+        }
+
+        .nav-menu-container.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-links li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background: #172554;
+            color: #facc15;
+            padding-left: 45px;
+        }
+
+        .nav-links li a.btn-salir {
+            color: #fca5a5;
+            background: rgba(220, 38, 38, 0.15);
+        }
+
+        .nav-links li a.btn-salir:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        /* TÍTULO PRINCIPAL */
+        .titulo-seccion {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        .titulo-seccion h1 {
+            color: #0f172a;
+            font-size: 42px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.6);
+        }
+
+        /* CONTENEDOR DE LA TARJETA (MÁS GRANDE Y ANCHO) */
+        .contenedor {
+            width: 95%;
+            max-width: 1000px;
+            margin: 20px auto 50px;
+        }
+
+        .tarjeta {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.22);
+            text-align: center;
+            border-top: 8px solid #1e3a8a;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .grupo {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1e3a8a;
+            letter-spacing: 1px;
+        }
+
+        .curso {
+            font-size: 19px;
+            margin-bottom: 35px;
+            color: #64748b;
+            font-weight: bold;
+        }
+
+        /* CAJAS DE INTEGRANTES GRANDES Y CON ANIMACIÓN FLUIDA */
+        .integrante {
+            padding: 20px 25px;
+            margin: 16px 0;
+            background: #ffffff;
+            border-left: 8px solid #1e3a8a;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e293b;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            text-align: left;
+        }
+
+        .integrante:hover {
+            transform: translateX(10px) scale(1.01);
+            background: #f8fafc;
+            border-left-color: #facc15;
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.2);
+            color: #1e3a8a;
+        }
+
+        /* CAJA DEL DOCENTE MEJORADA */
+        .docente {
+            margin-top: 40px;
+            padding: 25px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            border: 2px solid #facc15;
+            border-radius: 14px;
+            color: white;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.3);
+        }
+
+        .docente h3 {
+            margin-bottom: 8px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #facc15;
+        }
+
+        .docente p {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 60px;
+            border-top: 4px solid #facc15;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+            object-fit: cover;
+        }
+
+        .footer-text h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #facc15;
+        }
+
+        .footer-text p {
+            margin-top: 3px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .footer-info {
+            color: #cbd5e1;
+            font-size: 13px;
+            border-top: 1px solid #334155;
+            padding-top: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .header-brand span { font-size: 24px; }
+            .titulo-seccion h1 { font-size: 28px; }
+            .tarjeta { padding: 25px; }
+            .integrante { font-size: 17px; padding: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FRANJA SUPERIOR -->
+    <div class="header-top">
+        <div class="header-left">
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="header-brand">
+                <img src="logo.jpg" alt="Logo UAE">
+                <span>UAE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENÚ DESPLEGABLE -->
+    <nav class="nav-menu-container" id="nav-menu-container">
+        <ul class="nav-links">
+            <li><a href="Contenido.html">Contenido</a></li>
+            <li><a href="Calculadora.html">Calculadora Interactiva</a></li>
+            <li><a href="Formula.html">Fórmulas</a></li>
+            <li><a href="Ejercicios.html">Ejercicios Resueltos</a></li>
+            <li><a href="Integrantes.html" class="active">Integrantes</a></li>
+            <li><a href="index.html" class="btn-salir">Salir ✕</a></li>
+        </ul>
+    </nav>
+
+    <!-- TÍTULO -->
+    <div class="titulo-seccion">
+        <h1>INTEGRANTES DEL GRUPO</h1>
+    </div>
+
+    <!-- CONTENEDOR DE LA TARJETA -->
+    <div class="contenedor">
+        <div class="tarjeta">
+            <div class="grupo">GRUPO 6</div>
+            <div class="curso">CURSO: 6SC — Computación en Línea</div>
+
+            <div class="integrante">Benavides Márquez Carlos Josué</div>
+            <div class="integrante">Farías Cevallos María Gabriela</div>
+            <div class="integrante">Macías Manzaba Ernesto Rubén</div>
+            <div class="integrante">Padilla Espinoza Jesús Alberto</div>
+            <div class="integrante">Pizarro Ordoñez Milena Isabel</div>
+
+            <div class="docente">
+                <h3>Docente de la Asignatura</h3>
+                <p>Ing. María del Pilar Avilés Vera</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-top">
+            <img src="logo.jpg" class="footer-logo" alt="Logo UAE">
+            <div class="footer-text">
+                <h2>UNIVERSIDAD AGRARIA DEL ECUADOR</h2>
+                <p>Carrera: Ciencias de la Computación - Modalidad en Línea</p>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p>Asignatura: Ingeniería Económica</p>
+            <p>Período Académico 2026 - 2027</p>
+        </div>
+    </div>
+
+    <!-- SCRIPT DEL MENÚ HAMBURGUESA -->
+    <script>
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenuContainer = document.getElementById('nav-menu-container');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenuContainer.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenuContainer.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE - Fórmulas de Ingeniería Económica</title>
+    <!-- Fuente elegante para el texto UAE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* FONDO GRIS ELEGANTE CON TRANSPARENCIA Y ANIMACIÓN */
+        body {
+            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 50%, #64748b 100%);
+            background-size: 300% 300%;
+            animation: gradientBG 12s ease infinite;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* FRANJA SUPERIOR FIJA */
+        .header-top {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-brand img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+            transition: transform 0.4s ease;
+        }
+
+        .header-brand img:hover {
+            transform: rotate(360deg);
+        }
+
+        .header-brand span {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #facc15;
+            text-shadow: 0 2px 10px rgba(250, 204, 21, 0.6);
+        }
+
+        /* BOTÓN MENÚ HAMBURGUESA ANIMADO */
+        .hamburger-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 32px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .hamburger-btn span {
+            width: 100%;
+            height: 4px;
+            background-color: #facc15;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* MENÚ DESPLEGABLE NAV */
+        .nav-menu-container {
+            display: none;
+            background: rgba(30, 58, 138, 0.98);
+            backdrop-filter: blur(12px);
+            width: 100%;
+            position: fixed;
+            top: 85px;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-bottom: 4px solid #facc15;
+        }
+
+        .nav-menu-container.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-links li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background: #172554;
+            color: #facc15;
+            padding-left: 45px;
+        }
+
+        .nav-links li a.btn-salir {
+            color: #fca5a5;
+            background: rgba(220, 38, 38, 0.15);
+        }
+
+        .nav-links li a.btn-salir:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        /* TÍTULO DE LA PÁGINA */
+        .titulo-seccion {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        .titulo-seccion h1 {
+            color: #0f172a;
+            font-size: 42px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.6);
+        }
+
+        /* CONTENIDO PRINCIPAL ANCHO */
+        .contenido {
+            max-width: 1250px;
+            margin: auto;
+            padding: 10px 20px 40px;
+        }
+
+        /* GRILLA DE TARJETAS HORIZONTALES GRANDES (2 COLUMNAS) */
+        .cuadros-horizontales-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .modulo-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-left: 8px solid #1e3a8a;
+            border-top: 1px solid rgba(255,255,255,0.9);
+            outline: none;
+            border-right: none;
+            border-bottom: none;
+            width: 100%;
+        }
+
+        .modulo-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.25);
+            border-left-color: #facc15;
+            background: #ffffff;
+        }
+
+        /* ESTADO ACTIVO CUANDO SE PRESIONA */
+        .modulo-card.active {
+            background: #1e3a8a;
+            border-left-color: #facc15;
+            transform: scale(0.98);
+            box-shadow: inset 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .modulo-card.active .modulo-card-title {
+            color: #facc15;
+        }
+
+        .modulo-card-title {
+            font-size: 21px;
+            color: #1e3a8a;
+            font-weight: bold;
+            line-height: 1.4;
+            transition: color 0.3s;
+        }
+
+        /* --- CAJAS DESPLEGABLES DE CONTENIDO (ACORDEÓN GRANDE) --- */
+        .acordeon-content-box {
+            display: none;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.22);
+            border-top: 6px solid #1e3a8a;
+            margin-bottom: 30px;
+            animation: expandContent 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes expandContent {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .acordeon-content-box.active {
+            display: block;
+        }
+
+        .grid-desplegable {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 35px;
+            align-items: center;
+        }
+
+        /* CAJA DE FÓRMULA ESTILIZADA MODERNA */
+        .formula-box {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            border: 2px solid #facc15;
+            padding: 22px;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #facc15;
+            margin: 20px 0;
+            line-height: 1.6;
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.35);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .imagen-desplegable {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .imagen-desplegable:hover {
+            transform: scale(1.03);
+        }
+
+        .lista-puntos {
+            margin: 15px 0 0 20px;
+            color: #475569;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 60px;
+            border-top: 4px solid #facc15;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+            object-fit: cover;
+        }
+
+        .footer-text h2 { margin: 0; font-size: 20px; color: #facc15; }
+        .footer-text p { margin-top: 3px; color: #94a3b8; font-size: 13px; }
+
+        .footer-info {
+            color: #cbd5e1;
+            font-size: 13px;
+            border-top: 1px solid #334155;
+            padding-top: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .cuadros-horizontales-grid {
+                grid-template-columns: 1fr;
+            }
+            .grid-desplegable {
+                grid-template-columns: 1fr;
+            }
+            .header-brand span { font-size: 24px; }
+            .titulo-seccion h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FRANJA SUPERIOR -->
+    <div class="header-top">
+        <div class="header-left">
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="header-brand">
+                <img src="logo.jpg" alt="Logo UAE">
+                <span>UAE</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENÚ DESPLEGABLE -->
+    <nav class="nav-menu-container" id="nav-menu-container">
+        <ul class="nav-links">
+            <li><a href="Contenido.html">Contenido</a></li>
+            <li><a href="Calculadora.html">Calculadora Interactiva</a></li>
+            <li><a href="Formula.html" class="active">Fórmulas</a></li>
+            <li><a href="Ejercicios.html">Ejercicios Resueltos</a></li>
+            <li><a href="Integrantes.html">Integrantes</a></li>
+            <li><a href="index.html" class="btn-salir">Salir ✕</a></li>
+        </ul>
+    </nav>
+
+    <!-- TÍTULO DE LA PÁGINA -->
+    <div class="titulo-seccion">
+        <h1>FÓRMULAS DE INGENIERÍA ECONÓMICA</h1>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="contenido">
+
+        <!-- FILA DE TARJETAS HORIZONTALES GRANDES (SIN ICONOS) -->
+        <div class="cuadros-horizontales-grid">
+            
+            <button class="modulo-card" onclick="toggleAcordeon('formula-1', this)">
+                <div class="modulo-card-title">Interés Simple (I)</div>
+            </button>
+
+            <button class="modulo-card" onclick="toggleAcordeon('formula-2', this)">
+                <div class="modulo-card-title">Despejes de Interés Simple</div>
+            </button>
+
+            <button class="modulo-card" onclick="toggleAcordeon('formula-3', this)">
+                <div class="modulo-card-title">Monto o Valor Futuro (M)</div>
+            </button>
+
+            <button class="modulo-card" onclick="toggleAcordeon('formula-4', this)">
+                <div class="modulo-card-title">Despejes a partir del Monto</div>
+            </button>
+
+            <button class="modulo-card" onclick="toggleAcordeon('formula-5', this)">
+                <div class="modulo-card-title">Valor Presente y Descuento Racional</div>
+            </button>
+
+            <button class="modulo-card" onclick="toggleAcordeon('formula-6', this)">
+                <div class="modulo-card-title">Descuento Comercial (D)</div>
+            </button>
+
+            <button class="modulo-card" onclick="toggleAcordeon('formula-7', this)" style="grid-column: span 2;">
+                <div class="modulo-card-title">Tasa de Interés Real Equivalente</div>
+            </button>
+
+        </div>
+
+        <!-- BLOQUES DESPLEGABLES (ACORDEÓN GRANDE) -->
+
+        <!-- 1. INTERÉS SIMPLE -->
+        <div id="formula-1" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 26px;">Cálculo de Interés Simple (I)</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 15px;">
+                        Producto que resulta de multiplicar el capital inicial por la tasa de interés y por el tiempo o plazo.
+                    </p>
+                    <div class="formula-box">
+                        I = C &times; i &times; n
+                    </div>
+                    <ul class="lista-puntos">
+                        <li><strong>I:</strong> Interés ganado o producido.</li>
+                        <li><strong>C:</strong> Capital inicial o principal.</li>
+                        <li><strong>i:</strong> Tasa de interés simple.</li>
+                        <li><strong>n:</strong> Plazo o tiempo.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="formula_interes.jpg" class="imagen-desplegable" alt="Interés Simple">
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. DESPEJES DE INTERÉS SIMPLE -->
+        <div id="formula-2" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 26px;">Despejes de Interés Simple (C, i, n)</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 15px;">
+                        Permiten obtener el Capital Inicial, la Tasa de Interés o el Tiempo cuando se conoce el valor del Interés.
+                    </p>
+                    <div class="formula-box" style="font-size: 18px; text-align: left; padding: 18px 25px;">
+                        • Capital: C = I / (i &times; n)<br>
+                        • Tasa: i = I / (C &times; n)<br>
+                        • Tiempo: n = I / (C &times; i)
+                    </div>
+                    <ul class="lista-puntos">
+                        <li><strong>C:</strong> Capital inicial a hallar.</li>
+                        <li><strong>i:</strong> Tasa de interés expresada en decimales.</li>
+                        <li><strong>n:</strong> Plazo expresado en la misma unidad de la tasa.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="formula_capital.jpg" class="imagen-desplegable" alt="Despejes Interés Simple">
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. MONTO O VALOR FUTURO -->
+        <div id="formula-3" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 26px;">Monto o Valor Futuro (M)</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 15px;">
+                        Suma total acumulada al finalizar el plazo (capital inicial más el interés producido).
+                    </p>
+                    <div class="formula-box">
+                        M = C + I<br>
+                        M = C &times; (1 + i &times; n)
+                    </div>
+                    <ul class="lista-puntos">
+                        <li><strong>M:</strong> Monto o valor acumulado futuro.</li>
+                        <li><strong>C:</strong> Capital inicial.</li>
+                        <li><strong>i:</strong> Tasa de interés simple.</li>
+                        <li><strong>n:</strong> Plazo o tiempo.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="formula_monto.jpg" class="imagen-desplegable" alt="Monto o Valor Futuro">
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. DESPEJES DEL MONTO -->
+        <div id="formula-4" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 26px;">Despejes a partir del Monto (C, i, n)</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 15px;">
+                        Fórmulas para determinar el Capital, la Tasa o el Tiempo cuando se parte del Monto Acumulado.
+                    </p>
+                    <div class="formula-box" style="font-size: 18px; text-align: left; padding: 18px 25px;">
+                        • Capital: C = M / (1 + i &times; n)<br>
+                        • Tasa: i = (M / C - 1) / n<br>
+                        • Plazo: n = (M / C - 1) / i
+                    </div>
+                    <ul class="lista-puntos">
+                        <li><strong>M:</strong> Monto final conocido.</li>
+                        <li><strong>C:</strong> Capital inicial.</li>
+                        <li><strong>i y n:</strong> Tasa y tiempo en unidades coincidentes.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="formula_ganancia.jpg" class="imagen-desplegable" alt="Despejes del Monto">
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. VALOR PRESENTE -->
+        <div id="formula-5" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 26px;">Valor Presente y Descuento Racional (VP)</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 15px;">
+                        Calcula el valor equivalente hoy de una deuda futura restándole el descuento correspondiente.
+                    </p>
+                    <div class="formula-box">
+                        VP = F / (1 + i &times; n)<br>
+                        D = F - VP
+                    </div>
+                    <ul class="lista-puntos">
+                        <li><strong>VP:</strong> Valor Presente o Capital inicial.</li>
+                        <li><strong>F:</strong> Valor Futuro o pagadero al vencimiento.</li>
+                        <li><strong>D:</strong> Descuento aplicado.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="formula_presente.jpg" class="imagen-desplegable" alt="Valor Presente">
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. DESCUENTO COMERCIAL -->
+        <div id="formula-6" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 26px;">Descuento Simple o Comercial (D)</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 15px;">
+                        Costo de recibir el dinero de manera anticipada. El descuento se aplica sobre el valor nominal.
+                    </p>
+                    <div class="formula-box">
+                        D = F &times; d &times; n<br>
+                        P = F - D
+                    </div>
+                    <ul class="lista-puntos">
+                        <li><strong>D:</strong> Descuento bancario o comercial.</li>
+                        <li><strong>F:</strong> Valor nominal del préstamo o pagaré.</li>
+                        <li><strong>P:</strong> Capital líquido recibido.</li>
+                        <li><strong>d:</strong> Tasa de descuento por período.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="formula_compuesto.jpg" class="imagen-desplegable" alt="Descuento Comercial">
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. TASA REAL EQUIVALENTE -->
+        <div id="formula-7" class="acordeon-content-box">
+            <div class="grid-desplegable">
+                <div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px; font-size: 26px;">Tasa de Interés Real Equivalente (i)</h2>
+                    <p style="line-height: 1.7; color: #475569; font-size: 16px; margin-bottom: 15px;">
+                        Permite hallar la tasa de interés real cobrada al vencimiento cuando los intereses son descontados por anticipado.
+                    </p>
+                    <div class="formula-box">
+                        i = d / (1 - n &times; d)
+                    </div>
+                    <ul class="lista-puntos">
+                        <li><strong>i:</strong> Tasa de interés real equivalente al vencimiento.</li>
+                        <li><strong>d:</strong> Tasa de descuento cobrada por anticipado.</li>
+                        <li><strong>n:</strong> Plazo del préstamo.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="tecnologia.jpg" class="imagen-desplegable" alt="Tasa Equivalente">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-top">
+            <img src="logo.jpg" class="footer-logo" alt="Logo UAE">
+            <div class="footer-text">
+                <h2>UNIVERSIDAD AGRARIA DEL ECUADOR</h2>
+                <p>Carrera: Ciencias de la Computación - Modalidad en Línea</p>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <p>Asignatura: Ingeniería Económica</p>
+            <p>Período Académico 2026 - 2027</p>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // LÓGICA DEL MENÚ HAMBURGUESA
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenuContainer = document.getElementById('nav-menu-container');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenuContainer.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenuContainer.classList.remove('active');
+            });
+        });
+
+        // LÓGICA DE ACORDEÓN HORIZONTAL CON ANIMACIÓN DE PRESIÓN
+        function toggleAcordeon(idContenido, cardElement) {
+            const contenidoBox = document.getElementById(idContenido);
+            const estaActivo = contenidoBox.classList.contains('active');
+
+            // Cierra todas las cajas y quita el estado activo de todas las tarjetas
+            document.querySelectorAll('.acordeon-content-box').forEach(box => {
+                box.classList.remove('active');
+            });
+            document.querySelectorAll('.modulo-card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Si no estaba activo, lo abre y activa el botón presionado
+            if (!estaActivo) {
+                contenidoBox.classList.add('active');
+                cardElement.classList.add('active');
+                
+                // Desplazamiento suave automático hacia el contenido desplegado
+                contenidoBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    </script>
+</body>
+</html>
